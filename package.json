@@ -1,0 +1,41 @@
+{
+  "name": "media-query-gap",
+  "version": "0.0.0",
+  "description": "Apply gap on max-width/height media queries.",
+  "main": "index.js",
+  "author": "Ivan Nikolić <niksy5@gmail.com> (http://ivannikolic.com)",
+  "license": "MIT",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "eslint '{index,test/**/*}.js' && nyc mocha 'test/**/*.js' && nyc check-coverage"
+  },
+  "dependencies": {
+    "postcss-value-parser": "^3.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.1.1",
+    "eslint-config-niksy": "^3.0.1",
+    "mocha": "^3.1.2",
+    "nyc": "^8.4.0"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "keywords": [
+    "css",
+    "gap",
+    "media",
+    "mq",
+    "query"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niksy/media-query-gap.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niksy/media-query-gap/issues"
+  },
+  "homepage": "https://github.com/niksy/media-query-gap#readme"
+}
