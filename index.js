@@ -1,48 +1,47 @@
-'use strict';
-
-const parse = require('postcss-value-parser');
+import parse from 'postcss-value-parser';
 
 /**
- * @param  {String} str
+ * @param {string} string
  *
- * @return {String}
+ * @returns {string}
  */
-module.exports = ( str ) => {
+export default (string) => {
+	const tree = parse(string);
 
-	const tree = parse(str);
-
-	tree.walk(( node ) => {
-
-		if ( node.type === 'function' ) {
-
+	tree.walk((node) => {
+		if (node.type === 'function') {
 			const values = node.nodes;
-			const maxQuery = values.some(( item ) => {
+			const maxQuery = values.some((item) => {
 				return /max-(?:width|height)/.test(item.value);
 			});
 
 			// If we are working with max-width/height query
-			if ( maxQuery ) {
+			if (maxQuery) {
 				values
 
 					// Work only with pixel and em values
-					.filter(( item ) => {
+					.filter((item) => {
 						const value = parse.unit(item.value);
-						return item.type === 'word' && (value && /px|em/.test(value.unit));
+						return (
+							item.type === 'word' &&
+							value &&
+							/px|em/.test(value.unit)
+						);
 					})
 
 					// Apply gap
-					.map(( item ) => {
+					.map((item) => {
 						const value = parse.unit(item.value);
 						const step = value.unit === 'px' ? 1 : 0.01;
-						item.value = [Number(value.number) - step, value.unit].join('');
+						item.value = [
+							Number(value.number) - step,
+							value.unit
+						].join('');
 						return item;
 					});
 			}
-
 		}
-
 	});
 
 	return tree.toString();
-
 };
